@@ -1,0 +1,35 @@
+#!/bin/sh
+
+PREREQ=""
+prereqs() {
+    echo $PREREQ
+}
+
+case $1 in
+prereqs)
+    exit 0
+    ;;
+esac
+
+echo "start loading loop"
+
+loopdevice=$(cat /proc/cmdline | tr ' ' '\n' | grep "^root_loop_device=" | cut -d '=' -f 2-)
+loopfile=$(cat /proc/cmdline | tr ' ' '\n' | grep "^root_loop_file=" | cut -d '=' -f 2-)
+
+if [ -z "$loopdevice" ]; then
+    echo "stop loading loop: no root_loop_device"
+    exit 0
+fi
+if [ -z "$loopfile" ]; then
+    echo "stop loading loop: no root_loop_file"
+    exit 0
+fi
+
+echo "load loop '${loopfile}' in '${loopdevice}': /dev/loop0"
+mkdir /mnt
+mount -t ext4 $loopdevice /mnt
+losetup -P /dev/loop0 "/mnt${loopfile}"
+echo "loaded loop '${loopfile}' in '${loopdevice}': /dev/loop0"
+
+ROOT_MOUNTED=n
+
