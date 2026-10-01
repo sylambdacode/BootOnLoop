@@ -1,4 +1,6 @@
-# An initramfs-tools script for booting from a loop file.
+# BootOnLoop
+
+An initramfs-tools script for booting from a loop file.
 
 ## Setup
 
@@ -10,9 +12,9 @@ Afterwards, copy this script to the `/etc/initramfs-tools/scripts/local-premount
 
 To utilize this script, add kernel commands: `root_loop_device` and `root_loop_file`.
 
-- **`root_loop_device`**: This variable refers to the disk partition (formatted as EXT4) where your loop file is situated.
+- **`root_loop_device`**: This variable refers to the disk partition (formatted as EXT4) where the loop file is situated.
 
-- **`root_loop_file`**: This is the path to your loop file.
+- **`root_loop_file`**: This is the path to the loop file on the disk partition `root_loop_device`.
 
 ## Example
 
