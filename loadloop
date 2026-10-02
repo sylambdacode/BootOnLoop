@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Copyright (c) 2026 sylambdacode
+# SPDX-License-Identifier: MIT
+
 PREREQ=""
 prereqs() {
     echo $PREREQ
